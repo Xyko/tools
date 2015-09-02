@@ -14,15 +14,15 @@ class Console
 
 		desc "config"
 		command "config" do ||
-			Prompt.application.prompt = "tools > ".blue
+			Prompt.application.prompt = " tools > ".light_blue
 		end
 
 		desc "show"
 		command "show" do ||
 		end
 
-		Prompt.application.prompt = " cmdapi > ".red
-		history_file = ".tools-history")    
+		Prompt.application.prompt = " tools > ".light_red
+		history_file = ".tools-history"  
 		Prompt::Console.start history_file
 
   end

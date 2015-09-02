@@ -1,17 +1,11 @@
 #!/usr/bin/env ruby
 # coding: utf-8
-require 'rubygems'
-require 'awesome_print'
-require 'colorize'
-require 'prompt'
-require 'thor'
+require 'tools'
 
-
-class Tools < Thor
+class Tools_Exec < Thor
 
   # Initializing CommandManager
   ToolsUtil.new
-
 
   # Cmdapi interactive mode
   desc 'console', 'Start interactive cmdapi console.'
@@ -19,11 +13,24 @@ class Tools < Thor
     Console.new
   end
 
+  desc 'ruby?', 'Show ruby Info.'
+  def ruby?
+    if ENV['GEM_HOME'].nil?
+      puts 'Environment variable GEM_HOME is empty, you should be using RVM for ths task to work.'
+      exit(1)
+    end
+    Dir[ENV['GEM_HOME']+'/gems/*'].each do |entry|
+      ap entry
+    end
+
+
+  end
+
+
   # command operations
   def method_missing(method, *args, &block)
 		positional_args, opts = Thor::Options.split(args)
   end
-
 
   # All no_commands methods should be in this block (bellow)
   no_commands do
@@ -31,4 +38,4 @@ class Tools < Thor
 
 end
 
-Capi_exec.start(ARGV)
+Tools_Exec.start(ARGV)

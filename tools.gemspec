@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'colorize', '~> 0.7.7'
   spec.add_runtime_dependency 'thor', '~> 0.19.1'
   spec.add_runtime_dependency 'prompt','~> 1.2', '>= 1.2.2'
-
+  spec.add_runtime_dependency 'i18n', '~> 0.7', '>= 0.7.0'
+  
   spec.required_ruby_version = '>= 2.0.0'
 end
