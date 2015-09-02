@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+# coding: utf-8
+require 'rubygems'
+require 'awesome_print'
+require 'colorize'
+require 'prompt'
+require 'thor'
+
+
+class Tools < Thor
+
+  # Initializing CommandManager
+  ToolsUtil.new
+
+
+  # Cmdapi interactive mode
+  desc 'console', 'Start interactive cmdapi console.'
+  def console
+    Console.new
+  end
+
+  # command operations
+  def method_missing(method, *args, &block)
+		positional_args, opts = Thor::Options.split(args)
+  end
+
+
+  # All no_commands methods should be in this block (bellow)
+  no_commands do
+  end
+
+end
+
+Capi_exec.start(ARGV)
