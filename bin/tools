@@ -22,8 +22,6 @@ class Tools_Exec < Thor
     Dir[ENV['GEM_HOME']+'/gems/*'].each do |entry|
       ap entry
     end
-
-
   end
 
 

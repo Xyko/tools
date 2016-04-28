@@ -1,10 +1,8 @@
 class Console
 
-  def initialize(options = {})
-
-  	commands
-
-  end
+	def initialize(options = {})
+		commands
+	end
 
   def commands
 
@@ -18,8 +16,72 @@ class Console
 		end
 
 		desc "show"
-		command "show" do ||
+		command "show :param" do |param|
+			case param
+			when 'config'
+				puts "ROOT      .: #{Tools.root}"
+				puts "USER      .: #{Tools.configuration.user}"
+				puts "HOME      .: #{Tools.configuration.home}"
+				puts "PWD       .: #{Tools.configuration.pwd}"
+				puts "ldap_user .: #{Tools.configuration.ldap_user}"
+				puts "ldap_pass .: #{Tools.configuration.ldap_pass}"
+				Tools.configuration.info.each do |k,v|
+					ap k
+					ap v
+				end
+			else 
+				ap Tools.get_variable param
+			end
 		end
+
+		desc "rsync"
+		command "rsync :from :to" do |from, to|
+
+ap Tools.configuration.info[:directorys_to][from].nil?
+
+			unless Tools.configuration.info[:directorys_to][from].nil?
+			 from = Tools.configuration.info[:directorys_to][from]
+			 from += ask("?? ") 
+			else
+				sourcefiles = File.join("**", from)
+				Dir.glob(sourcefiles).each do |source|
+					ap source
+				end
+			end
+
+ap from
+
+					# if File.file?(source)
+					# 	result = Rsync.run(source, dest)
+					# 	ap result
+					# end
+
+		end
+
+		desc "connect"
+		command "connect :host" do |host|
+			if host.split('@').size == 2
+				user = host.split('@')[0]
+				host = host.split('@')[1]
+			else
+				unless Tools.configuration.info[:servers][host].nil?
+					user = Tools.configuration.info[:servers][host].split('@')[0]
+					host = Tools.configuration.info[:servers][host].split('@')[1]
+				else
+					ap "No hosts selected! Exiting..."
+				end
+			end
+			ssh = Tools.ssh_connect_knowhost host, user
+			Tools.set_variable 'ssh', ssh
+		end
+
+
+		desc "cmd"
+		command "cmd :variable :command " do |variable, command|
+			ssh = Tools.get_variable 'ssh'
+			Tools.set_variable variable, (Tools.ssh_cmd ssh, command).split("\n")
+		end
+
 
 		Prompt.application.prompt = " tools > ".light_red
 		history_file = ".tools-history"  
