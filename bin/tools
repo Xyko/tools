@@ -19,7 +19,7 @@ class Tools_exec < Thor
 
   desc 'help', ''
   def help(command='')
-    puts "\thelp will be here..... Coming soon....".light_green
+    puts "\tHELP will be here..... Coming soon....".light_green
   end
 
   desc 'show', ''
@@ -35,8 +35,18 @@ class Tools_exec < Thor
 
   desc 'config', ''
   def config
-    ToolsConfig.config
+  ap 'config'
+  #    ToolsConfig.config
   end
+
+
+  desc 'console', ''
+  def console
+    ap 'console'
+    #ToolsConsole.create_console
+    #ToolsConsole.run_console
+  end
+
 
   def method_missing(method, *args, &block) 
     exit()
