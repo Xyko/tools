@@ -1,5 +1,4 @@
 # coding: utf-8
-
 require 'bundler/gem_tasks'
 require_relative 'lib/tools/version'
 
@@ -32,3 +31,16 @@ task :dev do
   puts 'You may now start editing and testing files from within this repo.'
 end
 
+
+desc "Release the gem in Artifactory (DEV)"
+task :push do
+  gem_file   = "#{ENV['PWD']}/pkg/workin-#{Workin::VERSION}.gem"
+  gem_server_url = 'https://rubygems.org'
+  system("gem push #{gem_file}  --host #{gem_server_url}")
+end
+
+
+desc "Run all minitests."
+task :mini do
+  system("./test/minitest/run")
+end

@@ -1,39 +1,54 @@
 #!/usr/bin/env ruby
 # coding: utf-8
 require 'tools'
+require 'thor'
 
-class Tools_Exec < Thor
+Signal.trap("INT") { 
+  puts "\n\tNote: You will typically use Signal.trap instead.\n".light_red
+  exit
+}
 
-  # Initializing CommandManager
-  ToolsUtil.new
+Signal.trap("TERM") {
+  puts "\n\tNote: You will typically use Signal.trap instead.\n".light_red
+  exit
+}
 
-  # Cmdapi interactive mode
-  desc 'console', 'Start interactive cmdapi console.'
-  def console
-    Console.new
+load Tools.files + '/requireds.rb'
+
+class Tools_exec < Thor
+
+  desc 'help', ''
+  def help(command='')
+    puts "\thelp will be here..... Coming soon....".light_green
   end
 
-  desc 'ruby?', 'Show ruby Info.'
-  def ruby?
-    if ENV['GEM_HOME'].nil?
-      puts 'Environment variable GEM_HOME is empty, you should be using RVM for ths task to work.'
-      exit(1)
-    end
-    Dir[ENV['GEM_HOME']+'/gems/*'].each do |entry|
-      ap entry
-    end
+  desc 'show', ''
+  def show(command='')
+    puts "Gem_path.:  #{Workin.gem_path}"
+    puts "Ldap_pass.: #{Workin.ldap_pass}"
+    puts "Ldap_user.: #{Workin.ldap_user}"
+    puts "User.:      #{Workin.user}"
+    puts "Pwd.:       #{Workin.pwd}"
+    puts "Host.:      #{Workin.host}"
+    puts "Files:      #{Workin.files}"
   end
 
-
-  # command operations
-  def method_missing(method, *args, &block)
-		positional_args, opts = Thor::Options.split(args)
+  desc 'config', ''
+  def config
+    ToolsConfig.config
   end
 
-  # All no_commands methods should be in this block (bellow)
-  no_commands do
+  def method_missing(method, *args, &block) 
+    exit()
   end
 
 end
 
-Tools_Exec.start(ARGV)
+begin
+  Tools_exec.start(ARGV)
+rescue SystemExit => e
+  puts "\tExiting tools gem... See you later...".light_green
+  exit(e.status)
+rescue Exception => e
+  puts e
+end
