@@ -23,11 +23,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.10", '>= 5.10.2'
 
   spec.add_runtime_dependency 'gem-man', '~> 0.3', '>= 0.3.0'
-  spec.add_runtime_dependency 'awesome_print', '~> 1.7', '>= 1.7.0'
+  spec.add_runtime_dependency 'awesome_print'
   spec.add_runtime_dependency 'colorize', '~> 0.7.7'
   spec.add_runtime_dependency 'prompt', '~> 1.2', '>= 1.2.2'
   spec.add_runtime_dependency 'i18n', '~> 0.7', '>= 0.7.0'
-  spec.add_runtime_dependency 'thor', '~> 0.19.1'
+  spec.add_runtime_dependency 'thor'
   spec.add_runtime_dependency 'rest-client', '~> 1.8', '>= 1.8.0'
   spec.add_runtime_dependency 'net-ssh'
   spec.add_runtime_dependency 'ipcalc', '~> 1.0', '>= 1.0.0'

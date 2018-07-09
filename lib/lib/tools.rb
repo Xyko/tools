@@ -171,6 +171,10 @@ end
 
 class String
 
+  def teste
+    return "testando o teste"
+  end
+
   def nil?
     return '' if self == nil
   end
