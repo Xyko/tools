@@ -1,17 +1,22 @@
 require "tools/version"
-require 'lib/tools'
+
+# Basic models
+require 'lib/utils'
 require 'lib/display'
+require 'lib/net'
+require 'lib/files'
+
+# Extented models
 require 'lib/config'
 require 'lib/log'
-require 'lib/files'
-require 'lib/net'
+require 'lib/cache'
 
 # require 'lib/console'
 
 load __dir__ + '/files/requireds.rb'
 
 module Tools
-  
+
   @@check_version = nil
 
   def self.set_check_version param
@@ -78,7 +83,6 @@ end
 Tools.configure do |config|
   config.console_prompt = Tools::VERSION
   ToolsUtil.instance
-  ToolsLog.info "\tToolsUtil Initialized."
 end
 
 

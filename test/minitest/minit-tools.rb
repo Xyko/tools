@@ -14,7 +14,7 @@ class ToolsModuleTest < Minitest::Test
     now = DateTime.now
     (ToolsUtil.get_date '%Y %m %d %H %M').split(' ').each do |d|
       assert_equal (now.to_s.include? d), true
-    end 
+    end
   end
 
   def test_tools_set_get_variable
@@ -40,7 +40,7 @@ class ToolsModuleTest < Minitest::Test
   end
 
   def test_tools_string_fix
-    assert_equal  " ".fix(10), "          " 
+    assert_equal  " ".fix(10), "          "
   end
 
   def test_tools_string_nil_true

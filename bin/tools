@@ -3,7 +3,7 @@
 require 'tools'
 require 'thor'
 
-Signal.trap("INT") { 
+Signal.trap("INT") {
   puts "\n\tNote: You will typically use Signal.trap instead.\n".light_red
   exit
 }
@@ -20,17 +20,18 @@ class Tools_exec < Thor
   desc 'help', ''
   def help(command='')
     puts "\tHELP will be here..... Coming soon....".light_green
+
   end
 
   desc 'show', ''
   def show(command='')
-    puts "Gem_path.:  #{Workin.gem_path}"
-    puts "Ldap_pass.: #{Workin.ldap_pass}"
-    puts "Ldap_user.: #{Workin.ldap_user}"
-    puts "User.:      #{Workin.user}"
-    puts "Pwd.:       #{Workin.pwd}"
-    puts "Host.:      #{Workin.host}"
-    puts "Files:      #{Workin.files}"
+    puts "Gem_path.:  #{Tools.gem_path}"
+    puts "Ldap_pass.: #{Tools.ldap_pass}"
+    puts "Ldap_user.: #{Tools.ldap_user}"
+    puts "User.:      #{Tools.user}"
+    puts "Pwd.:       #{Tools.pwd}"
+    puts "Host.:      #{Tools.host}"
+    puts "Files:      #{Tools.files}"
   end
 
   desc 'config', ''
@@ -48,7 +49,8 @@ class Tools_exec < Thor
   end
 
 
-  def method_missing(method, *args, &block) 
+  def method_missing(method, *args, &block)
+
     exit()
   end
 
